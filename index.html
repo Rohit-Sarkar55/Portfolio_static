@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohit Sarkar — Software Engineer</title>
+  <meta name="description" content="Rohit Sarkar — Full Stack Software Engineer at Deloitte. Java, Spring Boot, AWS, Kafka. LeetCode Knight, Top 3% globally." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080c14;
+      --surface:   #0d1525;
+      --card:      #111e33;
+      --border:    #1a2d4a;
+      --border2:   #243d60;
+      --blue:      #3b82f6;
+      --blue-dim:  #1d4ed8;
+      --blue-glow: rgba(59,130,246,0.18);
+      --blue-pale: rgba(59,130,246,0.08);
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --muted2:    #94a3b8;
+      --mono:      'IBM Plex Mono', monospace;
+      --display:   'Syne', sans-serif;
+      --body:      'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-dim); border-radius: 2px; }
+    ::selection { background: var(--blue); color: #fff; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .nav-logo {
+      font-family: var(--display); font-weight: 800; font-size: 1.1rem;
+      color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+      text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 6px;
+      transition: all 0.2s; letter-spacing: 0.03em;
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-pale); }
+    .nav-hire {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+      color: var(--blue); border: 1px solid var(--blue);
+      background: var(--blue-pale); padding: 0.4rem 1rem;
+      border-radius: 6px; text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .nav-hire:hover { background: var(--blue); color: #fff; }
+
+    /* ── SECTIONS ── */
+    section { max-width: 1000px; margin: 0 auto; padding: 5rem 2rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 80px; position: relative;
+      max-width: 100%; padding-left: 10vw; padding-right: 10vw;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-glow {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 400px; pointer-events: none;
+      background: radial-gradient(ellipse at center top, rgba(59,130,246,0.12) 0%, transparent 70%);
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono); font-size: 0.72rem; color: var(--blue);
+      background: var(--blue-pale); border: 1px solid rgba(59,130,246,0.3);
+      padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem;
+      letter-spacing: 0.05em; width: fit-content;
+    }
+    .hero-tag::before {
+      content: ''; width: 6px; height: 6px; background: var(--blue);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-name {
+      font-family: var(--display); font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800; line-height: 0.95; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .hero-name .blue { color: var(--blue); }
+    .hero-role {
+      font-family: var(--display); font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 400; color: var(--muted2); margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-desc {
+      max-width: 560px; color: var(--muted); line-height: 1.7;
+      font-size: 0.95rem; margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-primary {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: #fff; background: var(--blue);
+      padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none;
+      transition: all 0.2s; letter-spacing: 0.02em; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,0.35); }
+    .btn-outline {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: var(--blue); background: transparent;
+      border: 1px solid var(--border2); padding: 0.7rem 1.5rem;
+      border-radius: 8px; text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.02em; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline:hover { border-color: var(--blue); background: var(--blue-pale); }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; max-width: 560px;
+    }
+    .stat {
+      background: var(--card); padding: 1rem 1.25rem; text-align: center;
+    }
+    .stat-val {
+      font-family: var(--display); font-size: 1.6rem; font-weight: 800;
+      color: var(--blue); letter-spacing: -0.03em; line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+      margin-top: 0.35rem; letter-spacing: 0.04em; line-height: 1.3;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-eyebrow {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--blue);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;
+    }
+    .sec-eyebrow::before, .sec-eyebrow::after {
+      content: ''; flex: 0 0 24px; height: 1px; background: var(--blue);
+    }
+    .sec-title {
+      font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem;
+    }
+    .sec-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 3rem; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: var(--border2); }
+    .skill-cat {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--blue);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-family: var(--mono); font-size: 0.7rem;
+      background: var(--blue-pale); color: var(--muted2);
+      border: 1px solid var(--border2); padding: 0.25rem 0.6rem;
+      border-radius: 4px; letter-spacing: 0.02em;
+    }
+
+    /* ── EXPERIENCE TIMELINE ── */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--blue), rgba(59,130,246,0.1));
+    }
+    .exp-item { position: relative; margin-bottom: 2.5rem; }
+    .exp-dot {
+      position: absolute; left: -1.875rem; top: 4px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--blue); border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .exp-dot.active {
+      animation: glow-dot 2s ease-in-out infinite;
+    }
+    @keyframes glow-dot {
+      0%,100% { box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+      50% { box-shadow: 0 0 0 6px rgba(59,130,246,0.1), 0 0 12px rgba(59,130,246,0.3); }
+    }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .exp-card:hover { border-color: var(--border2); }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+    .exp-title { font-family: var(--display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
+    .exp-company { color: var(--blue); font-size: 0.85rem; font-weight: 500; margin-top: 0.2rem; }
+    .exp-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-align: right; line-height: 1.6; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.85rem 0; }
+    .exp-bullets { list-style: none; padding: 0; }
+    .exp-bullets li {
+      font-size: 0.85rem; color: var(--muted2); line-height: 1.65;
+      padding: 0.3rem 0; padding-left: 1.1rem; position: relative;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--blue); font-size: 0.65rem; top: 0.45rem;
+    }
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.25rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; display: flex;
+      flex-direction: column; transition: all 0.25s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, var(--blue), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .project-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+    .project-card:hover::before { opacity: 1; }
+    .project-cat {
+      font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .project-title { font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; margin-bottom: 0.65rem; }
+    .project-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 1rem; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .project-links { display: flex; gap: 0.75rem; }
+    .project-link {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--blue);
+      text-decoration: none; display: flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: #93c5fd; }
+
+    /* ── ACHIEVEMENTS ── */
+    .achieve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .achieve-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s;
+    }
+    .achieve-card:hover { border-color: var(--border2); }
+    .achieve-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .achieve-val { font-family: var(--display); font-size: 1.3rem; font-weight: 800; color: var(--blue); letter-spacing: -0.02em; }
+    .achieve-title { font-family: var(--display); font-size: 0.85rem; font-weight: 600; margin: 0.2rem 0; }
+    .achieve-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
+
+    /* ── CERTIFICATIONS ── */
+    .certs-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .cert-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem; transition: border-color 0.2s;
+    }
+    .cert-item:hover { border-color: var(--border2); }
+    .cert-badge {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--blue-pale); border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .cert-name { font-family: var(--display); font-size: 0.9rem; font-weight: 600; }
+    .cert-issuer { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.85rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.9rem 1.1rem;
+      text-decoration: none; color: var(--text); transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--blue); transform: translateX(4px); }
+    .contact-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--blue-pale); display: flex; align-items: center;
+      justify-content: center; font-size: 0.9rem; flex-shrink: 0;
+    }
+    .contact-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+    .contact-val { font-size: 0.82rem; font-weight: 500; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    input, textarea {
+      width: 100%; background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.75rem 1rem; color: var(--text);
+      font-family: var(--body); font-size: 0.85rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, textarea:focus { border-color: var(--blue); }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); margin-bottom: 0.4rem; display: block; letter-spacing: 0.05em; }
+    .send-btn {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: #fff; background: var(--blue); border: none; cursor: pointer;
+      padding: 0.8rem; border-radius: 8px; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .send-btn:hover { background: #2563eb; }
+    .send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 2rem;
+      text-align: center; font-family: var(--mono);
+      font-size: 0.68rem; color: var(--muted);
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // ── DATA ─────────────────────────────────────────────────────
+    const DATA = {
+      skills: [
+        { cat: 'Languages',      items: ['Java','Python','C/C++','JavaScript','TypeScript','HTML','CSS'] },
+        { cat: 'Frameworks',     items: ['Spring Boot','Spring AI','Spring Security','Angular','React','Node.js','FastAPI','Kafka'] },
+        { cat: 'Databases',      items: ['PostgreSQL','MySQL','TimescaleDB','MongoDB'] },
+        { cat: 'Cloud / DevOps', items: ['AWS EC2','AWS S3','AWS RDS','IAM','CloudWatch','Docker','Jenkins','CI/CD','Git'] },
+        { cat: 'Testing',        items: ['JUnit','Mockito','Postman','Insomnia','SoapUI','DevTools'] },
+        { cat: 'Concepts',       items: ['Microservices','Distributed Systems','REST APIs','OOP','System Design','DSA','OAuth2','HIPAA','Agile'] },
+      ],
+      experience: [
+        {
+          title:   'Software Engineer / Full Stack Developer',
+          company: 'Deloitte',
+          loc:     'Bengaluru, India',
+          dates:   'Nov 2023 – Present',
+          current: true,
+          stack:   ['Java','Spring Boot','PostgreSQL','AWS','Kafka','Angular','Spring AI'],
+          bullets: [
+            'Architected <strong>10+ production microservices</strong> and RESTful APIs for enterprise healthcare claims processing, boosting efficiency by <strong>30%</strong> and maintaining <strong>99.9% data integrity</strong>.',
+            'Reduced database query latency by <strong>40%</strong> via PostgreSQL EXPLAIN ANALYZE, composite indexing, and schema tuning; extended analytics to TimescaleDB.',
+            'Deployed services on <strong>AWS (EC2, S3, RDS)</strong> with CI/CD pipelines; enforced IAM least-privilege and used CloudWatch for real-time monitoring.',
+            'Integrated <strong>Spring AI + ML models</strong> for fraud-risk scoring and anomaly detection, cutting manual review by <strong>20%</strong>; secured APIs with OAuth2 — full HIPAA compliance.',
+            'Built <strong>Kafka</strong> event-driven pipelines cutting validation errors by <strong>25%</strong>; resolved 50+ production defects.',
+            'Achieved <strong>85%+ code coverage</strong> (200+ JUnit/Mockito tests); led code reviews, defined API contracts, mentored junior engineers.',
+          ],
+        },
+        {
+          title:   'Technical Content Writer Intern',
+          company: 'GeeksForGeeks',
+          loc:     'Remote',
+          dates:   'Dec 2022 – Jul 2023',
+          current: false,
+          stack:   ['DSA','System Design','Algorithms'],
+          bullets: [
+            'Authored <strong>20+ top-read articles</strong> on data structures, algorithms, and system design with full complexity analysis.',
+            'Content referenced by thousands of <strong>FAANG interview candidates</strong> globally.',
+          ],
+        },
+        {
+          title:   'Full Stack Developer Intern',
+          company: 'Full Creative',
+          loc:     'Chennai, India',
+          dates:   'Jan 2023 – Mar 2023',
+          current: false,
+          stack:   ['Electron JS','Node.js','TypeScript','Excel'],
+          bullets: [
+            'Built <strong>3 cross-platform desktop productivity apps</strong> using Electron JS, Node.js, and TypeScript, significantly reducing manual reporting time.',
+            'Delivered responsive UI/UX within Agile sprint deadlines.',
+          ],
+        },
+      ],
+      projects: [
+        {
+          title: 'URL Shortener API',
+          cat:   'Backend',
+          desc:  'RESTful short-URL service with redirect handling, input validation, duplicate detection, and expiry logic. Dockerised for horizontally scalable, production-ready deployment.',
+          stack: ['FastAPI','Docker','REST','Python'],
+          github: 'https://github.com/Rohit-Sarkar55/URL-Shortener',
+          live:   '',
+        },
+        {
+          title: 'Keeper App',
+          cat:   'Full Stack',
+          desc:  'Full-stack notes application with real-time CRUD, React hooks, persistent state management, reusable component architecture, and automated CI/CD deployment via Vercel.',
+          stack: ['React','Node.js','Vercel'],
+          github: '',
+          live:   'https://my-keeper-eta.vercel.app/',
+        },
+        {
+          title: 'Simon Game',
+          cat:   'Frontend',
+          desc:  'Progressive-difficulty browser memory game with real-time audio/visual feedback, high-score tracking, and smooth state transitions — advanced DOM manipulation and event-driven design.',
+          stack: ['JavaScript','HTML','CSS'],
+          github: '',
+          live:   'https://rohit-sarkar55.github.io/Simon-Game/',
+        },
+      ],
+      achievements: [
+        { icon: '🏆', val: 'Knight',  title: 'LeetCode Knight',        sub: 'Rating 1951 · Top 3% globally' },
+        { icon: '🌐', val: '#451',    title: 'Global Rank',            sub: 'LeetCode Weekly Contest 329' },
+        { icon: '⭐', val: '4-Star',  title: 'CodeChef',               sub: 'Max rating 1856' },
+        { icon: '💻', val: '1260',    title: 'Codeforces Pupil',       sub: 'Max rating' },
+        { icon: '🚀', val: '#2036',   title: 'Google Kick Start',      sub: '2022 Round B Global Rank' },
+        { icon: '🎯', val: 'Rd. 2',   title: 'Meta Hacker Cup 2022',   sub: 'Qualified · Rank 2711' },
+        { icon: '🧩', val: '1000+',   title: 'Problems Solved',        sub: 'LC · CC · CF · GFG' },
+        { icon: '✍️', val: '20+',     title: 'Articles Published',     sub: 'GeeksForGeeks' },
+      ],
+      certs: [
+        { icon: '🤖', name: 'AI Fluency: Framework and Foundations', issuer: 'Anthropic · 2025' },
+        { icon: '💡', name: 'Programming Fundamentals',              issuer: 'Duke University, Coursera' },
+        { icon: '🐍', name: 'Data Structures and Algorithms using Python', issuer: 'NPTEL' },
+        { icon: '🌐', name: 'MERN Stack Web Development',           issuer: 'Udemy' },
+      ],
+      contact: [
+        { icon: '✉️', label: 'Email',    val: 'sarkarrohit650@gmail.com', href: 'mailto:sarkarrohit650@gmail.com' },
+        { icon: '💼', label: 'LinkedIn', val: 'linkedin.com/in/rohit-sarkar', href: 'https://www.linkedin.com/in/rohit-sarkar-a592771b2/' },
+        { icon: '🐙', label: 'GitHub',   val: 'github.com/Rohit-Sarkar55',   href: 'https://github.com/Rohit-Sarkar55' },
+        { icon: '⌨️', label: 'LeetCode', val: 'leetcode.com/u/Tyfoon',       href: 'https://leetcode.com/u/Tyfoon/' },
+      ],
+    };
+
+    // ── HOOKS ────────────────────────────────────────────────────
+    function useFadeIn() {
+      const ref = useRef(null);
+      useEffect(() => {
+        const obs = new IntersectionObserver(
+          ([e]) => { if (e.isIntersecting) e.target.classList.add('visible'); },
+          { threshold: 0.1 }
+        );
+        if (ref.current) obs.observe(ref.current);
+        return () => obs.disconnect();
+      }, []);
+      return ref;
+    }
+
+    // ── COMPONENTS ───────────────────────────────────────────────
+    function Navbar() {
+      const links = ['About','Skills','Experience','Projects','Achievements','Contact'];
+      const scroll = (id) => {
+        document.getElementById(id.toLowerCase())
+          ?.scrollIntoView({ behavior: 'smooth' });
+      };
+      return (
+        <nav>
+          <a className="nav-logo" href="#">Rohit<span>.</span></a>
+          <div className="nav-links">
+            {links.map(l => (
+              <a key={l} href={`#${l.toLowerCase()}`}
+                onClick={e => { e.preventDefault(); scroll(l); }}>
+                {l}
+              </a>
+            ))}
+          </div>
+          <a className="nav-hire" href="#contact"
+            onClick={e => { e.preventDefault(); scroll('Contact'); }}>
+            hire_me()
+          </a>
+        </nav>
+      );
+    }
+
+    function Hero() {
+      const stats = [
+        { val: '2.5+', label: 'Years at Deloitte' },
+        { val: '10+',  label: 'Microservices' },
+        { val: '1951', label: 'LC Rating' },
+        { val: '1K+',  label: 'Problems' },
+      ];
+      return (
+        <section id="hero">
+          <div className="hero-grid" />
+          <div className="hero-glow" />
+          <div className="hero-tag">Open to SWE opportunities</div>
+          <h1 className="hero-name">
+            Rohit<br /><span className="blue">Sarkar</span>
+          </h1>
+          <p className="hero-role">
+            Software Engineer @ Deloitte &nbsp;·&nbsp; Java · Spring Boot · AWS · Kafka
+          </p>
+          <p className="hero-desc">
+            Building scalable microservices and distributed systems for enterprise clients.
+            LeetCode Knight — Top 3% globally. Passionate about high-performance, fault-tolerant systems.
+          </p>
+          <div className="hero-btns">
+            <a className="btn-primary" href="#projects"
+              onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}>
+              → View Projects
+            </a>
+            <a className="btn-outline" href="https://github.com/Rohit-Sarkar55" target="_blank" rel="noreferrer">
+              ↗ GitHub
+            </a>
+            <a className="btn-outline" href="https://www.linkedin.com/in/rohit-sarkar-a592771b2/" target="_blank" rel="noreferrer">
+              ↗ LinkedIn
+            </a>
+          </div>
+          <div className="hero-stats">
+            {stats.map(s => (
+              <div key={s.label} className="stat">
+                <div className="stat-val">{s.val}</div>
+                <div className="stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function About() {
+      const ref = useFadeIn();
+      return (
+        <section id="about" ref={ref} className="fade-in">
+          <div className="sec-eyebrow">About</div>
+          <h2 className="sec-title">Building systems that scale</h2>
+          <p className="sec-sub">Engineer by day, competitive programmer by nature.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {[
+                "Full Stack Software Engineer with 2.5+ years at Deloitte, architecting and shipping production-grade microservices for enterprise healthcare systems — where reliability and performance directly impact real users at scale.",
+                "My stack is Java and Spring Boot at the core, with deep experience in distributed systems, Kafka event-driven architecture, PostgreSQL query optimisation, and AWS cloud infrastructure.",
+                "Outside of work, I'm a competitive programmer — LeetCode Knight, Top 3% globally (rating 1951) with 1000+ problems solved. Strong fundamentals aren't just for interviews — they show up in how I design systems.",
+              ].map((p, i) => (
+                <p key={i} style={{ color: 'var(--muted2)', lineHeight: 1.75, fontSize: '0.9rem' }}>{p}</p>
+              ))}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {[
+                { label: 'Current Role', val: 'Software Engineer @ Deloitte', sub: 'Bengaluru, India · Nov 2023 – Present' },
+                { label: 'Education',    val: 'B.Tech, Computer Science',      sub: "St. Thomas' College · CGPA 9.06/10" },
+                { label: 'CP Rating',    val: 'LeetCode Knight · 1951',       sub: 'Top 3% globally · 1000+ solved' },
+                { label: 'Location',     val: 'Bengaluru / Kolkata, India',   sub: 'Open to remote & relocation' },
+              ].map(({ label, val, sub }) => (
+                <div key={label} style={{
+                  background: 'var(--card)', border: '1px solid var(--border)',
+                  borderRadius: '10px', padding: '0.9rem 1.1rem'
+                }}>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.25rem' }}>{label}</div>
+                  <div style={{ fontFamily: 'var(--display)', fontWeight: 700, fontSize: '0.9rem' }}>{val}</div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--muted)', marginTop: '0.2rem' }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Skills() {
+      const ref = useFadeIn();
+      return (
+        <section id="skills" ref={ref} className="fade-in" style={{ background: 'var(--surface)', maxWidth: '100%', padding: '5rem 10vw' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div className="sec-eyebrow">Technical Skills</div>
+            <h2 className="sec-title">What I work with</h2>
+            <p className="sec-sub">Technologies I use daily to build and ship production systems.</p>
+            <div className="skills-grid">
+              {DATA.skills.map(({ cat, items }) => (
+                <div key={cat} className="skill-card">
+                  <div className="skill-cat">{cat}</div>
+                  <div className="skill-tags">
+                    {items.map(t => <span key={t} className="tag">{t}</span>)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Experience() {
+      const ref = useFadeIn();
+      const [open, setOpen] = useState(0);
+      return (
+        <section id="experience" ref={ref} className="fade-in">
+          <div className="sec-eyebrow">Experience</div>
+          <h2 className="sec-title">Where I've worked</h2>
+          <p className="sec-sub">Click any role to expand or collapse details.</p>
+          <div className="timeline">
+            {DATA.experience.map((exp, i) => (
+              <div key={i} className="exp-item">
+                <div className={`exp-dot ${exp.current ? 'active' : ''}`} />
+                <div className="exp-card">
+                  <div className="exp-header" onClick={() => setOpen(open === i ? -1 : i)} style={{ cursor: 'pointer' }}>
+                    <div>
+                      <div className="exp-title">
+                        {exp.title}
+                        {exp.current && (
+                          <span style={{ marginLeft: '0.6rem', fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--blue)', background: 'var(--blue-pale)', border: '1px solid rgba(59,130,246,0.3)', padding: '0.15rem 0.5rem', borderRadius: '100px', verticalAlign: 'middle' }}>
+                            current
+                          </span>
+                        )}
+                      </div>
+                      <div className="exp-company">{exp.company} · {exp.loc}</div>
+                    </div>
+                    <div className="exp-meta">
+                      {exp.dates}<br/>
+                      <span style={{ color: 'var(--blue)', fontSize: '0.75rem' }}>{open === i ? '▲ collapse' : '▼ expand'}</span>
+                    </div>
+                  </div>
+                  <div className="exp-tags">
+                    {exp.stack.map(t => <span key={t} className="tag">{t}</span>)}
+                  </div>
+                  {open === i && (
+                    <ul className="exp-bullets">
+                      {exp.bullets.map((b, j) => (
+                        <li key={j} dangerouslySetInnerHTML={{ __html: b }} />
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    function Projects() {
+      const ref = useFadeIn();
+      return (
+        <section id="projects" ref={ref} className="fade-in" style={{ background: 'var(--surface)', maxWidth: '100%', padding: '5rem 10vw' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div className="sec-eyebrow">Projects</div>
+            <h2 className="sec-title">Things I've built</h2>
+            <p className="sec-sub">Personal and open source projects.</p>
+            <div className="projects-grid">
+              {DATA.projects.map((p, i) => (
+                <div key={i} className="project-card">
+                  <div className="project-cat">{p.cat}</div>
+                  <div className="project-title">{p.title}</div>
+                  <div className="project-desc">{p.desc}</div>
+                  <div className="exp-tags">
+                    {p.stack.map(t => <span key={t} className="tag">{t}</span>)}
+                  </div>
+                  <div className="project-footer">
+                    <div className="project-links">
+                      {p.github && (
+                        <a className="project-link" href={p.github} target="_blank" rel="noreferrer">
+                          ↗ Source
+                        </a>
+                      )}
+                      {p.live && (
+                        <a className="project-link" href={p.live} target="_blank" rel="noreferrer">
+                          ↗ Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Achievements() {
+      const ref = useFadeIn();
+      return (
+        <section id="achievements" ref={ref} className="fade-in">
+          <div className="sec-eyebrow">Achievements</div>
+          <h2 className="sec-title">Competitive programming</h2>
+          <p className="sec-sub">1000+ problems solved across LeetCode, CodeChef, Codeforces, and GFG.</p>
+          <div className="achieve-grid">
+            {DATA.achievements.map((a, i) => (
+              <div key={i} className="achieve-card">
+                <div className="achieve-icon">{a.icon}</div>
+                <div className="achieve-val">{a.val}</div>
+                <div className="achieve-title">{a.title}</div>
+                <div className="achieve-sub">{a.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Certs */}
+          <div style={{ marginTop: '3rem' }}>
+            <div className="sec-eyebrow">Certifications</div>
+            <div className="certs-list" style={{ marginTop: '1.25rem' }}>
+              {DATA.certs.map((c, i) => (
+                <div key={i} className="cert-item">
+                  <div className="cert-badge">{c.icon}</div>
+                  <div>
+                    <div className="cert-name">{c.name}</div>
+                    <div className="cert-issuer">{c.issuer}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Contact() {
+      const ref = useFadeIn();
+      const [form, setForm] = useState({ name:'', email:'', subject:'', body:'' });
+      const [sent, setSent] = useState(false);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        const mailto = `mailto:sarkarrohit650@gmail.com?subject=${encodeURIComponent(form.subject)}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.body}`)}`;
+        window.location.href = mailto;
+        setSent(true);
+      };
+
+      return (
+        <section id="contact" ref={ref} className="fade-in" style={{ background: 'var(--surface)', maxWidth: '100%', padding: '5rem 10vw' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div className="sec-eyebrow">Contact</div>
+            <h2 className="sec-title">Let's work together</h2>
+            <p className="sec-sub">Open to full-time roles, freelance, and interesting conversations.</p>
+            <div className="contact-grid">
+              <div>
+                <p style={{ color: 'var(--muted2)', fontSize: '0.88rem', lineHeight: 1.75, marginBottom: '1.5rem' }}>
+                  I'm currently open to Software Engineer roles at product-based companies.
+                  If you have an opportunity or just want to connect — send me a message.
+                </p>
+                <div className="contact-links">
+                  {DATA.contact.map((c, i) => (
+                    <a key={i} className="contact-link" href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+                      <div className="contact-icon">{c.icon}</div>
+                      <div>
+                        <div className="contact-label">{c.label}</div>
+                        <div className="contact-val">{c.val}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              {sent ? (
+                <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'1rem', background:'var(--card)', border:'1px solid var(--border)', borderRadius:'12px', padding:'2rem', textAlign:'center' }}>
+                  <div style={{ fontSize:'3rem' }}>✅</div>
+                  <div style={{ fontFamily:'var(--display)', fontWeight:700, fontSize:'1.1rem' }}>Opening your mail app...</div>
+                  <p style={{ color:'var(--muted)', fontSize:'0.82rem' }}>Your default mail client should open with the message pre-filled.</p>
+                  <button className="btn-outline" onClick={() => setSent(false)}>Send another</button>
+                </div>
+              ) : (
+                <form className="contact-form" onSubmit={handleSubmit}>
+                  <div className="form-row">
+                    <div>
+                      <label className="form-label">NAME *</label>
+                      <input value={form.name} onChange={e=>setForm(p=>({...p,name:e.target.value}))} placeholder="Your name" required />
+                    </div>
+                    <div>
+                      <label className="form-label">EMAIL *</label>
+                      <input type="email" value={form.email} onChange={e=>setForm(p=>({...p,email:e.target.value}))} placeholder="you@company.com" required />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="form-label">SUBJECT *</label>
+                    <input value={form.subject} onChange={e=>setForm(p=>({...p,subject:e.target.value}))} placeholder="Job opportunity / Collaboration" required />
+                  </div>
+                  <div>
+                    <label className="form-label">MESSAGE *</label>
+                    <textarea value={form.body} onChange={e=>setForm(p=>({...p,body:e.target.value}))} placeholder="Tell me about the opportunity..." required />
+                  </div>
+                  <button type="submit" className="send-btn">
+                    ↗ Send Message
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer>
+          <p style={{ marginBottom: '0.5rem' }}>
+            <a href="https://github.com/Rohit-Sarkar55" target="_blank" rel="noreferrer" style={{ color:'var(--blue)', textDecoration:'none', margin:'0 0.5rem' }}>GitHub</a>
+            <a href="https://www.linkedin.com/in/rohit-sarkar-a592771b2/" target="_blank" rel="noreferrer" style={{ color:'var(--blue)', textDecoration:'none', margin:'0 0.5rem' }}>LinkedIn</a>
+            <a href="https://leetcode.com/u/Tyfoon/" target="_blank" rel="noreferrer" style={{ color:'var(--blue)', textDecoration:'none', margin:'0 0.5rem' }}>LeetCode</a>
+          </p>
+          <p>© {new Date().getFullYear()} Rohit Sarkar · Built with React · sarkarrohit650@gmail.com</p>
+        </footer>
+      );
+    }
+
+    function App() {
+      return (
+        <>
+          <Navbar />
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Achievements />
+          <Contact />
+          <Footer />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
