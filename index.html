@@ -340,6 +340,92 @@
     .send-btn:hover { background: #2563eb; }
     .send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+    /* ── RESUME ── */
+    .resume-wrapper {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 2rem;
+    }
+    .resume-preview {
+      width: 100%; max-width: 680px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      transition: border-color 0.2s;
+    }
+    .resume-preview:hover { border-color: var(--border2); }
+    .resume-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+    }
+    .resume-dots { display: flex; gap: 0.4rem; }
+    .resume-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .resume-filename {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--muted);
+    }
+    .resume-actions { display: flex; gap: 0.75rem; }
+    .resume-content {
+      padding: 2rem 2.5rem;
+      font-family: var(--body); font-size: 0.78rem;
+      color: var(--muted2); line-height: 1.7;
+    }
+    .resume-name {
+      font-family: var(--display); font-weight: 800;
+      font-size: 1.4rem; color: var(--text);
+      letter-spacing: -0.02em; text-align: center; margin-bottom: 0.3rem;
+    }
+    .resume-contact {
+      font-family: var(--mono); font-size: 0.62rem;
+      color: var(--muted); text-align: center; margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    .resume-section-title {
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+      color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border); padding-bottom: 0.3rem;
+      margin: 1.25rem 0 0.75rem;
+    }
+    .resume-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 1rem; flex-wrap: wrap;
+    }
+    .resume-job-title { font-weight: 600; color: var(--text); font-size: 0.8rem; }
+    .resume-company { color: var(--muted2); font-size: 0.75rem; }
+    .resume-date { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); flex-shrink: 0; }
+    .resume-bullet { padding-left: 1rem; position: relative; margin-bottom: 0.2rem; }
+    .resume-bullet::before { content: '–'; position: absolute; left: 0; color: var(--blue); }
+    .resume-skill-row { margin-bottom: 0.3rem; }
+    .resume-skill-row strong { color: var(--muted2); }
+    .resume-blur {
+      position: relative; overflow: hidden; border-radius: 0 0 16px 16px;
+    }
+    .resume-blur::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--card));
+      pointer-events: none;
+    }
+    .resume-cta {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .resume-cta-text {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted); text-align: center;
+    }
+    .resume-dl-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--mono); font-size: 0.82rem; font-weight: 600;
+      color: #fff; background: var(--blue);
+      padding: 0.85rem 2.5rem; border-radius: 10px;
+      text-decoration: none; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+    }
+    .resume-dl-btn:hover {
+      background: #2563eb; transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(59,130,246,0.45);
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border); padding: 2rem;
@@ -488,7 +574,7 @@
 
     // ── COMPONENTS ───────────────────────────────────────────────
     function Navbar() {
-      const links = ['About','Skills','Experience','Projects','Achievements','Contact'];
+      const links = ['About','Skills','Experience','Projects','Achievements','Resume','Contact'];
       const scroll = (id) => {
         document.getElementById(id.toLowerCase())
           ?.scrollIntoView({ behavior: 'smooth' });
@@ -538,6 +624,12 @@
             <a className="btn-primary" href="#projects"
               onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}>
               → View Projects
+            </a>
+            <a className="btn-primary" href="Rohit_Sarkar_Resume.pdf" download="Rohit_Sarkar_Resume.pdf"
+              style={{ background: 'transparent', border: '1px solid var(--blue)', color: 'var(--blue)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--blue)'; e.currentTarget.style.color = '#fff'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--blue)'; }}>
+              ↓ Download Resume
             </a>
             <a className="btn-outline" href="https://github.com/Rohit-Sarkar55" target="_blank" rel="noreferrer">
               ↗ GitHub
@@ -744,6 +836,90 @@
       );
     }
 
+    function Resume() {
+      const ref = useFadeIn();
+      return (
+        <section id="resume" ref={ref} className="fade-in" style={{ background: 'var(--surface)', maxWidth: '100%', padding: '5rem 10vw' }}>
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div className="sec-eyebrow">Resume</div>
+            <h2 className="sec-title">My Resume</h2>
+            <p className="sec-sub">A snapshot of my experience, skills, and achievements.</p>
+
+            <div className="resume-wrapper">
+              {/* Preview card */}
+              <div className="resume-preview">
+                {/* Fake browser/PDF topbar */}
+                <div className="resume-topbar">
+                  <div className="resume-dots">
+                    <span style={{ background: '#ff5f57' }} />
+                    <span style={{ background: '#febc2e' }} />
+                    <span style={{ background: '#28c840' }} />
+                  </div>
+                  <span className="resume-filename">Rohit_Sarkar_Resume.pdf</span>
+                  <a href="Rohit_Sarkar_Resume.pdf" download="Rohit_Sarkar_Resume.pdf"
+                    style={{ fontFamily:'var(--mono)', fontSize:'0.65rem', color:'var(--blue)', textDecoration:'none' }}>
+                    ↓ download
+                  </a>
+                </div>
+
+                {/* Resume content preview */}
+                <div className="resume-blur">
+                  <div className="resume-content">
+                    <div className="resume-name">ROHIT SARKAR</div>
+                    <div className="resume-contact">
+                      sarkarrohit650@gmail.com | +91 98746 30970 | Bengaluru / Kolkata, India<br/>
+                      linkedin.com/in/rohit-sarkar | github.com/Rohit-Sarkar55 | leetcode.com/u/Tyfoon
+                    </div>
+
+                    <div className="resume-section-title">Technical Skills</div>
+                    <div className="resume-skill-row"><strong>Languages:</strong> Java, Python, C/C++, JavaScript, TypeScript, HTML, CSS</div>
+                    <div className="resume-skill-row"><strong>Frameworks:</strong> Spring Boot, Spring AI, Spring Security, Angular, React, Node.js, FastAPI, Kafka</div>
+                    <div className="resume-skill-row"><strong>Databases:</strong> PostgreSQL (EXPLAIN ANALYZE, query optimisation, indexing), MySQL, TimescaleDB</div>
+                    <div className="resume-skill-row"><strong>Cloud / DevOps:</strong> AWS (EC2, S3, RDS, IAM, CloudWatch), Docker, Jenkins, CI/CD, Git, GitHub</div>
+
+                    <div className="resume-section-title">Experience</div>
+                    <div className="resume-row">
+                      <div>
+                        <div className="resume-job-title">Software Engineer / Full Stack Developer</div>
+                        <div className="resume-company">Deloitte, Bengaluru</div>
+                      </div>
+                      <div className="resume-date">Nov 2023 – Present</div>
+                    </div>
+                    <div style={{ marginTop: '0.5rem' }}>
+                      <div className="resume-bullet">Architected <strong>10+ production microservices</strong> boosting efficiency by <strong>30%</strong>, maintaining <strong>99.9% data integrity</strong>.</div>
+                      <div className="resume-bullet">Reduced query latency by <strong>40%</strong> via PostgreSQL optimisation; deployed on <strong>AWS</strong> with CI/CD.</div>
+                      <div className="resume-bullet">Integrated <strong>Spring AI + ML models</strong> for fraud detection; <strong>85%+ code coverage</strong> with 200+ tests.</div>
+                    </div>
+
+                    <div className="resume-section-title">Competitive Programming</div>
+                    <div className="resume-bullet"><strong>LeetCode Knight</strong> — Rating 1951, Top 3% globally | Global Rank 451 (Weekly Contest 329)</div>
+                    <div className="resume-bullet">CodeChef 4-Star (1856) | Google Kick Start 2022 — Global Rank 2036 | 1000+ problems solved</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Download CTA */}
+              <div className="resume-cta">
+                <p className="resume-cta-text">
+                  // Full resume with all experience, projects, and certifications
+                </p>
+                <a
+                  href="Rohit_Sarkar_Resume.pdf"
+                  download="Rohit_Sarkar_Resume.pdf"
+                  className="resume-dl-btn"
+                >
+                  ↓ Download Full Resume
+                </a>
+                <p style={{ fontFamily:'var(--mono)', fontSize:'0.62rem', color:'var(--muted)' }}>
+                  PDF · ATS-friendly · Updated 2025
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
     function Contact() {
       const ref = useFadeIn();
       const [form, setForm] = useState({ name:'', email:'', subject:'', body:'' });
@@ -841,6 +1017,7 @@
           <Experience />
           <Projects />
           <Achievements />
+          <Resume />
           <Contact />
           <Footer />
         </>
