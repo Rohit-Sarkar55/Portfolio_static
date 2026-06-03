@@ -510,6 +510,15 @@
       ],
       projects: [
         {
+          title: 'Library Management System',
+          cat:   'Full Stack',
+          desc:  'Full-stack library platform with Spring Boot backend, Angular 17 frontend, and PostgreSQL on Neon cloud. Features book/member management, issue/return workflow with overdue detection, soft delete for audit integrity, global exception handling, and Swagger/OpenAPI docs.',
+          stack: ['Spring Boot','Angular','PostgreSQL','Java','TypeScript','REST'],
+          github: 'https://github.com/Rohit-Sarkar55/Library_Management_System',
+          live:   'https://library-management-system-vert-eight.vercel.app/dashboard',
+          swagger: 'https://library-management-system-6a61.onrender.com/swagger-ui/index.html',
+        },
+        {
           title: 'URL Shortener API',
           cat:   'Backend',
           desc:  'RESTful short-URL service with redirect handling, input validation, duplicate detection, and expiry logic. Dockerised for horizontally scalable, production-ready deployment.',
@@ -625,7 +634,7 @@
               onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}>
               → View Projects
             </a>
-            <a className="btn-primary" href="Rohit_Sarkar_Resume.pdf" download="Rohit_Sarkar_Resume.pdf"
+            <a className="btn-primary" href="Rohit_Sarkar_Resume_AI_Engineer.pdf" download="Rohit_Sarkar_Resume_AI_Engineer.pdf"
               style={{ background: 'transparent', border: '1px solid var(--blue)', color: 'var(--blue)' }}
               onMouseEnter={e => { e.currentTarget.style.background = 'var(--blue)'; e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--blue)'; }}>
@@ -789,6 +798,11 @@
                           ↗ Live Demo
                         </a>
                       )}
+                      {p.swagger && (
+                        <a className="project-link" href={p.swagger} target="_blank" rel="noreferrer">
+                          ↗ Swagger
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -855,8 +869,8 @@
                     <span style={{ background: '#febc2e' }} />
                     <span style={{ background: '#28c840' }} />
                   </div>
-                  <span className="resume-filename">Rohit_Sarkar_Resume.pdf</span>
-                  <a href="Rohit_Sarkar_Resume.pdf" download="Rohit_Sarkar_Resume.pdf"
+                  <span className="resume-filename">Rohit_Sarkar_Resume_AI_Engineer.pdf</span>
+                  <a href="Rohit_Sarkar_Resume_AI_Engineer.pdf" download="Rohit_Sarkar_Resume_AI_Engineer.pdf"
                     style={{ fontFamily:'var(--mono)', fontSize:'0.65rem', color:'var(--blue)', textDecoration:'none' }}>
                     ↓ download
                   </a>
@@ -904,8 +918,8 @@
                   // Full resume with all experience, projects, and certifications
                 </p>
                 <a
-                  href="Rohit_Sarkar_Resume.pdf"
-                  download="Rohit_Sarkar_Resume.pdf"
+                  href="Rohit_Sarkar_Resume_AI_Engineer.pdf"
+                  download="Rohit_Sarkar_Resume_AI_Engineer.pdf"
                   className="resume-dl-btn"
                 >
                   ↓ Download Full Resume
